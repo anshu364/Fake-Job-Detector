@@ -38,3 +38,62 @@ Risk Score
 Risk Level
      ↓
 Suspicious Indicators
+---
+
+## 🧠 Machine Learning Model
+
+The project uses **TF-IDF (Term Frequency-Inverse Document Frequency)** to convert job posting text into numerical features.
+
+A **Logistic Regression** classifier is then used to predict whether the posting is potentially fraudulent or likely legitimate.
+
+### Model Configuration
+
+- Dataset: Real/Fake Job Posting Dataset
+- Total Job Postings: 17,880
+- TF-IDF Features: 5,000
+- Train-Test Split: 80/20
+- Class Balancing: `class_weight="balanced"`
+- Model: Logistic Regression
+
+### Model Performance
+
+- Accuracy: 96.76%
+- Fraudulent Class Precision: 61%
+- Fraudulent Class Recall: 90%
+- Fraudulent Class F1-Score: 73%
+
+> Note: The risk score is a model-estimated score and should not be interpreted as a calibrated real-world probability.
+
+---
+
+## 📱 Application
+
+The project is available through:
+
+- **Streamlit Web Application** for testing job postings
+- **FastAPI Backend** for serving ML predictions
+- **Android Application** built using Kotlin and Android Studio
+- **Render** for online API deployment
+
+### System Architecture
+
+```text
+Job Posting
+     ↓
+Text Preprocessing
+     ↓
+TF-IDF Vectorization
+     ↓
+Logistic Regression
+     ↓
+Fraud Prediction
+     ↓
+Risk Score
+     ↓
+Risk Level
+     ↓
+Suspicious Indicators
+     ↓
+FastAPI
+     ↓
+Android Application
