@@ -58,14 +58,35 @@ def analyze_job(job_text: str):
 
     text = job_text.lower()
 
-    if any(word in text for word in [
+    # Payment detection
+    payment_keywords = [
         "registration fee",
+        "application fee",
+        "processing fee",
         "pay money",
         "upfront payment",
-        "payment required"
-    ]):
+        "payment required",
+        "pay a fee"
+    ]
+
+    payment_denials = [
+        "no registration fee",
+        "no application fee",
+        "no processing fee",
+        "no payment required",
+        "no payment is required",
+        "no fee required",
+        "without any fee",
+        "without payment"
+    ]
+
+    if (
+        any(word in text for word in payment_keywords)
+        and not any(phrase in text for phrase in payment_denials)
+    ):
         suspicious_indicators.append("Payment Request")
 
+    # Unrealistic earnings
     if any(word in text for word in [
         "earn huge money",
         "guaranteed income",
@@ -73,6 +94,7 @@ def analyze_job(job_text: str):
     ]):
         suspicious_indicators.append("Unrealistic Salary/Earnings")
 
+    # Urgency
     if any(word in text for word in [
         "urgent hiring",
         "apply immediately",
@@ -80,6 +102,7 @@ def analyze_job(job_text: str):
     ]):
         suspicious_indicators.append("Urgency")
 
+    # Personal information
     if any(word in text for word in [
         "bank details",
         "credit card",
